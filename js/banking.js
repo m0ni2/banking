@@ -71,7 +71,13 @@ function updateTotalBalance(inputAmount, isAdd) {
         balanceField.innerText = prevBalanceAmount + inputAmount;
     }
     else {
-        balanceField.innerText = prevBalanceAmount - inputAmount;
+        // validation
+        if (inputAmount <= prevBalanceAmount) {
+            balanceField.innerText = prevBalanceAmount - inputAmount;
+        }
+        else {
+            console.log('Please Enter Withdraw Amount less than Balance')
+        }
     }
 
 }
@@ -81,11 +87,18 @@ document.getElementById('deposite-button').addEventListener('click', function ()
     // get inputField value
     const inputAmount = getInputAmount('deposite-input');
 
-    // calculate total deposite and update deposite field value
-    updateTotalAmount('deposited-amount', inputAmount);
+    // validation
+    if (inputAmount > 0) {
+        // calculate total deposite and update deposite field value
+        updateTotalAmount('deposited-amount', inputAmount);
 
-    // calculate total balance and update balance field value
-    updateTotalBalance(inputAmount, true);
+        // calculate total balance and update balance field value
+        updateTotalBalance(inputAmount, true);
+    }
+    else {
+        console.log('Please Enter Positve Deposite Value');
+    }
+
 })
 
 
@@ -94,9 +107,15 @@ document.getElementById('withdraw-button').addEventListener('click', function ()
     // get inputField value
     const inputAmount = getInputAmount('withdraw-input');
 
-    // calculate total withdraw and update withdraw field value
-    updateTotalAmount('withdrawed-amount', inputAmount);
+    // validation
+    if (inputAmount > 0) {
+        // calculate total withdraw and update withdraw field value
+        updateTotalAmount('withdrawed-amount', inputAmount);
 
-    // calculate total balance and update balance field value
-    updateTotalBalance(inputAmount, false);
+        // calculate total balance and update balance field value
+        updateTotalBalance(inputAmount, false);
+    }
+    else {
+        console.log('Please Enter Positve Withdraw Value');
+    }
 })
